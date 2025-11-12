@@ -4,6 +4,8 @@
  */
 package newpackageFORUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo
@@ -17,6 +19,8 @@ public class MainMenuFrame extends javax.swing.JFrame {
      */
     public MainMenuFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -41,6 +45,9 @@ public class MainMenuFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LANLYA HOTEL RESERVATION SYSTEM");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("Windw"); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -151,6 +158,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
         jButton2.setText("VIEW BOOKINGS");
 
         jButton3.setText("BOOK A ROOM");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,9 +218,31 @@ public class MainMenuFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
+        int choice = JOptionPane.showConfirmDialog(
+        this, 
+        "Are you sure you want to logout?", 
+        "Logout Confirmation", 
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (choice == JOptionPane.YES_OPTION) {
         System.exit(0);
+    }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        // Go to BookingForm
+        BookingFormPanel booking = new BookingFormPanel();
+        booking.setVisible(true);
+        booking.pack();
+        booking.setLocationRelativeTo(null); // Center the new window
+        this.dispose(); // Close MainForm
+
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
