@@ -19,6 +19,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
      */
     public MainMenuFrame() {
         initComponents();
+        
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -67,7 +68,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 3, 24)); // NOI18N
-        jLabel1.setText("WELCOME TO LANLYA HOTEL RESERVATION SYSTEM");
+        jLabel1.setText("WELCOME TO LANLYA HOTEL RESERVATION ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

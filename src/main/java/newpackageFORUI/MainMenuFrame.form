@@ -186,7 +186,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Berlin Sans FB Demi" size="24" style="3"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="WELCOME TO LANLYA HOTEL RESERVATION SYSTEM"/>
+                <Property name="text" type="java.lang.String" value="WELCOME TO LANLYA HOTEL RESERVATION "/>
               </Properties>
             </Component>
           </SubComponents>
