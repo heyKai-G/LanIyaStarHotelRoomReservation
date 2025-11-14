@@ -12,7 +12,6 @@ public class LanIyaStarHotelRoomReservation {
 
     public static void main(String[] args) {
         System.out.println("LanIya Star Hotel Room Reservation");
-        System.out.println("Hello World");
-                System.out.println("Hello 24323");
+        System.out.println("Test");
     }
 }
