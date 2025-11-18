@@ -1,22 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package newpackageFORUI;
 
-/**
- *
- * @author Lenovo
- */
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+
 public class RoomSelectionPanel extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RoomSelectionPanel.class.getName());
 
-    /**
-     * Creates new form RoomSelectionPanel
-     */
     public RoomSelectionPanel() {
         initComponents();
+        setSize(800, 550);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,22 +25,138 @@ public class RoomSelectionPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        roomSelectionTable = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        confirmButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        suggestedRoomLabel = new javax.swing.JTextArea();
+        roomNoLabel = new javax.swing.JTextArea();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        roomNoSuggestText = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        enterRoomInput1 = new javax.swing.JTextArea();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roomSelectionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"100", "Available", "Luxury", "+5", "Wala"},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Room No", "Availability", "Room Type", "Capacity", "Season Rate"
+            }
+        ));
+        roomSelectionTable.setFocusable(false);
+        jScrollPane1.setViewportView(roomSelectionTable);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 760, 250));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("ROOM SELECTION");
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 760, 50));
+
+        confirmButton.setText("CONFIRM");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(confirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 110, 40));
+
+        backButton.setText("BACK");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 110, 40));
+
+        suggestedRoomLabel.setEditable(false);
+        suggestedRoomLabel.setColumns(20);
+        suggestedRoomLabel.setRows(5);
+        suggestedRoomLabel.setText("Suggested Room No(s) based \non number of guests:");
+        suggestedRoomLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        suggestedRoomLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        suggestedRoomLabel.setFocusable(false);
+        getContentPane().add(suggestedRoomLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 170, 40));
+
+        roomNoLabel.setEditable(false);
+        roomNoLabel.setColumns(20);
+        roomNoLabel.setRows(5);
+        roomNoLabel.setText("Enter Room No(s):");
+        roomNoLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roomNoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        roomNoLabel.setFocusable(false);
+        getContentPane().add(roomNoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 110, 30));
+
+        jScrollPane11.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        roomNoSuggestText.setEditable(false);
+        roomNoSuggestText.setColumns(20);
+        roomNoSuggestText.setRows(5);
+        roomNoSuggestText.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roomNoSuggestText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        roomNoSuggestText.setFocusable(false);
+        jScrollPane11.setViewportView(roomNoSuggestText);
+
+        getContentPane().add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 290, 30));
+
+        jScrollPane12.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane12.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        enterRoomInput1.setColumns(20);
+        enterRoomInput1.setRows(5);
+        enterRoomInput1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        enterRoomInput1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane12.setViewportView(enterRoomInput1);
+
+        getContentPane().add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 290, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        int result = JOptionPane.showConfirmDialog(this, 
+        "Confirm? Are all these information correct?", 
+        "Confirmation", 
+        JOptionPane.YES_NO_OPTION);
+    
+    if (result == JOptionPane.YES_OPTION) {
+        // proceed to PaymentPanel
+        AddonSelectionPanel addon = new AddonSelectionPanel();
+        addon.setVisible(true);
+        this.dispose(); // close current window
+    }
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        int result = JOptionPane.showConfirmDialog(this,
+        "Confirm? Are you sure you want to go back to the Booking Form Panel?",
+        "Back Confirmation",
+        JOptionPane.YES_NO_OPTION);
+        
+        if (result == JOptionPane.YES_OPTION) {
+        // clear all fields
+        enterRoomInput1.setText("");
+        roomNoSuggestText.setText("");
+        
+        BookingFormPanel panel = new BookingFormPanel();
+        panel.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_backButtonActionPerformed
+}
     /**
      * @param args the command line arguments
      */
@@ -70,5 +183,16 @@ public class RoomSelectionPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton confirmButton;
+    private javax.swing.JTextArea enterRoomInput1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JTextArea roomNoLabel;
+    private javax.swing.JTextArea roomNoSuggestText;
+    private javax.swing.JTable roomSelectionTable;
+    private javax.swing.JTextArea suggestedRoomLabel;
     // End of variables declaration//GEN-END:variables
 }

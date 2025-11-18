@@ -16,7 +16,7 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
         poolPanel.setVisible(false);
         spaPanel.setVisible(false);
         gymPanel.setVisible(false);
-        setSize(495, 550);
+        setSize(800, 550);
         setLocationRelativeTo(null);
     }
     
@@ -225,7 +225,7 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
 
         poolPanel.add(poolPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 460, 50));
 
-        getContentPane().add(poolPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 460, 50));
+        getContentPane().add(poolPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 760, 50));
 
         spaToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         spaToggleButton.setText("Spa");
@@ -242,20 +242,20 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
         jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
-        jTextArea3.setText("Lanlya Hotel offers the following services. Please enter the number of guest(s) for \neach selected service, as well as the number of senior citizens/PWDs.");
+        jTextArea3.setText("Lanlya Hotel offers the following services. Please enter the number of guest(s) for each selected service, as well as the number of \nsenior citizens/PWDs. Leave empty if you don't want to avail any services.");
         jTextArea3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextArea3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTextArea3.setFocusable(false);
         jScrollPane3.setViewportView(jTextArea3);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 460, 50));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 760, 50));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("SELECT SERVICES");
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 50));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 760, 50));
 
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -347,7 +347,7 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
 
         gymPanel.add(jScrollPane17, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 60, 30));
 
-        getContentPane().add(gymPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 460, 50));
+        getContentPane().add(gymPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 760, 50));
 
         gymToggleButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         gymToggleButton.setText("Gym");
@@ -411,7 +411,7 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
 
         spaPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 60, 30));
 
-        getContentPane().add(spaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 460, 50));
+        getContentPane().add(spaPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 760, 50));
 
         backButton.setText("BACK");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -419,7 +419,7 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 100, 40));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 110, 40));
 
         confirmButton.setText("CONFIRM");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -427,19 +427,19 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
                 confirmButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(confirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 100, 40));
+        getContentPane().add(confirmButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 110, 40));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(null);
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 460, 80));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 760, 80));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(null);
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 460, 80));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 760, 80));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(null);
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 460, 80));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 760, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
