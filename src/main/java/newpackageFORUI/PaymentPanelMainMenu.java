@@ -17,6 +17,9 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
      */
     public PaymentPanelMainMenu() {
         initComponents();
+        javax.swing.ButtonGroup paymentGroup = new javax.swing.ButtonGroup();
+        paymentGroup.add(jCashButton);
+        paymentGroup.add(jCreditButton);
     }
 
     /**
@@ -30,12 +33,13 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
 
         jPayment = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jCashButton = new javax.swing.JRadioButton();
+        jCreditButton = new javax.swing.JRadioButton();
+        jBack = new javax.swing.JButton();
+        jConfirm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         jPayment.setBackground(new java.awt.Color(255, 255, 255));
         jPayment.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -45,14 +49,19 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select mode of payment:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jRadioButton1.setText("CASH");
-
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jRadioButton2.setText("CREDIT / DEBIT");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jCashButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCashButton.setText("CASH");
+        jCashButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jCashButtonActionPerformed(evt);
+            }
+        });
+
+        jCreditButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jCreditButton.setText("CREDIT / DEBIT");
+        jCreditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCreditButtonActionPerformed(evt);
             }
         });
 
@@ -63,21 +72,31 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jCreditButton, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                    .addComponent(jCashButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
-                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jCashButton, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCreditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton2.setText("BACK");
+        jBack.setText("BACK");
+        jBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBackActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("CONFIRM");
+        jConfirm.setText("CONFIRM");
+        jConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConfirmActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,8 +110,8 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 472, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jConfirm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,18 +122,54 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBack, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void jCreditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreditButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_jCreditButtonActionPerformed
+
+    private void jCashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCashButtonActionPerformed
+  
+    }//GEN-LAST:event_jCashButtonActionPerformed
+
+    private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
+          
+    if (!jCashButton.isSelected() && !jCreditButton.isSelected()) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Please select a mode of payment first.",
+                "Selection Required",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    if (jCashButton.isSelected()) {
+        // OPEN CASH WINDOW
+        PaymentPanelCash cashWindow = new PaymentPanelCash();
+        cashWindow.setVisible(true);
+        this.dispose(); // close current menu
+    }
+
+    if (jCreditButton.isSelected()) {
+        // OPEN CARD WINDOW
+        PaymentPanelCard cardWindow = new PaymentPanelCard();
+        cardWindow.setVisible(true);
+        this.dispose(); // close current menu
+        }
+    }//GEN-LAST:event_jConfirmActionPerformed
+
+    private void jBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackActionPerformed
+        // TODO add your handling code here:
+        BookingSummaryPanel summary = new BookingSummaryPanel();
+        summary.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,11 +197,11 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBack;
+    private javax.swing.JRadioButton jCashButton;
+    private javax.swing.JButton jConfirm;
+    private javax.swing.JRadioButton jCreditButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jPayment;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     // End of variables declaration//GEN-END:variables
 }
