@@ -9,6 +9,16 @@ import java.util.logging.Level;
 
 public class ServiceSelectionPanel extends javax.swing.JFrame {
     
+    //Decleration
+    private int poolGuests;
+    private int poolSeniorPWD;
+
+    private int spaGuests;
+    private int spaSeniorPWD;
+
+    private int gymGuests;
+    private int gymSeniorPWD;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ServiceSelectionPanel.class.getName());
 
     public ServiceSelectionPanel() {
@@ -472,6 +482,13 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
         this.dispose(); // close current window
     }
     // if NO, do nothing and return
+    System.out.println(poolGuests);
+    System.out.println(poolSeniorPWD);
+    System.out.println(spaGuests);
+    System.out.println(spaSeniorPWD);
+    System.out.println(gymGuests);
+    System.out.println(gymSeniorPWD);
+
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -496,33 +513,37 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
     // if NO, do nothing
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private boolean validateInputs() {
+   private boolean validateInputs() {
     try {
         // Pool
         if (poolPanel.isVisible()) {
-            Integer.parseInt(poolGuestsInput.getText());
-            Integer.parseInt(poolSeniorPWDInput.getText());
+            poolGuests = Integer.parseInt(poolGuestsInput.getText());
+            poolSeniorPWD = Integer.parseInt(poolSeniorPWDInput.getText());
         }
+
         // Spa
         if (spaPanel.isVisible()) {
-            Integer.parseInt(spaGuestsInput.getText());
-            Integer.parseInt(spaSeniorPWDInput.getText());
+            spaGuests = Integer.parseInt(spaGuestsInput.getText());
+            spaSeniorPWD = Integer.parseInt(spaSeniorPWDInput.getText());
         }
+
         // Gym
         if (gymPanel.isVisible()) {
-            Integer.parseInt(gymGuestsInput.getText());
-            Integer.parseInt(gymSeniorPWDInput.getText());
+            gymGuests = Integer.parseInt(gymGuestsInput.getText());
+            gymSeniorPWD = Integer.parseInt(gymSeniorPWDInput.getText());
         }
-        return true; // all inputs are numbers
+
+        return true;
+
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Error. Incorrect Characters");
         return false;
     }
+    
+   
+    
 }
  
-
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
