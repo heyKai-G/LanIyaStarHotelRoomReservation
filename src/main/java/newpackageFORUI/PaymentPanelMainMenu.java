@@ -20,7 +20,9 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
         javax.swing.ButtonGroup paymentGroup = new javax.swing.ButtonGroup();
         paymentGroup.add(jCashButton);
         paymentGroup.add(jCreditButton);
+        setLocationRelativeTo(null);   
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

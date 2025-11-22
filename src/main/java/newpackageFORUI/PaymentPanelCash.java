@@ -17,6 +17,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
      */
     public PaymentPanelCash() {
         initComponents();
+        setLocationRelativeTo(null);   
     }
 
     /**
