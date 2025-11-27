@@ -8,15 +8,17 @@ package newpackageFORUI;
  *
  * @author Lenovo
  */
-public class RoomSelectionForGUEST extends javax.swing.JFrame {
+public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RoomSelectionForGUEST.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RoomSelectionForGuestInternational.class.getName());
 
     /**
-     * Creates new form RoomSelectionForGUEST
+     * Creates new form RoomSelectionForGuestInternational
      */
-    public RoomSelectionForGUEST() {
+    public RoomSelectionForGuestInternational() {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -35,7 +37,7 @@ public class RoomSelectionForGUEST extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("ROOM SELECTION");
+        jLabel4.setText("ROOM SELECTION INTERNATIONAL");
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -80,7 +82,7 @@ public class RoomSelectionForGUEST extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new RoomSelectionForGUEST().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new RoomSelectionForGuestInternational().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

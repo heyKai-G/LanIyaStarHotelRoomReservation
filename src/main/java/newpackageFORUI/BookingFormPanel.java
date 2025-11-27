@@ -804,6 +804,7 @@ bookingData.setCheckOut(jDateChoosecheckout.getDate());
 // If code reaches here → ALL INPUTS ARE VALID
 // Ask user for final confirmation
 // =====================================================
+bookingData.displayBookingData(bookingData);
 
 int result = JOptionPane.showConfirmDialog(
         this,
@@ -815,19 +816,38 @@ int result = JOptionPane.showConfirmDialog(
 
 if (result == JOptionPane.YES_OPTION) {
     // User clicked YES → proceed with database saving
-    JOptionPane.showMessageDialog(this, "Saving to database...");
+    JOptionPane.showMessageDialog(this, "Saving input...");
     // TODO: add your database save logic here
     
-    // --- REDIRECT TO ANOTHER FORM ---
-    RoomSelectionPanel roomSelection = new RoomSelectionPanel(); // instantiate next form
-    roomSelection.setVisible(true); // show RoomSelectionPanel
-    this.dispose(); // close current BookingFormPanel
+   String selectedType = (String) destination_type_picker.getSelectedItem();
+
+    if (selectedType == null || selectedType.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Please select a destination type.",
+                "Missing Input",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // === REDIRECT BASED ON DESTINATION TYPE ===
+    if (selectedType.equals("Local")) {
+        RoomSelectionForGUESTLocal localForm = new RoomSelectionForGUESTLocal();
+        localForm.setVisible(true);
+        this.dispose(); // close current form
+
+    } else if (selectedType.equals("International")) {
+        RoomSelectionForGuestInternational internationalForm = new RoomSelectionForGuestInternational();
+        internationalForm.setVisible(true);
+        this.dispose(); // close current form
+    }
+   
+    
 } else {
     // User clicked NO → cancel
     JOptionPane.showMessageDialog(this, "Please review your inputs.");
     return; // stop further execution
 }
-bookingData.displayBookingData(bookingData);
+
         
     }//GEN-LAST:event_ConfirmActionPerformed
 

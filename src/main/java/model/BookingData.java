@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author 
  */
 public class BookingData {
-   private String Booker_name;
+    private String Booker_name;
     private Date birthdate;
     private String email;
     private String mobile;
