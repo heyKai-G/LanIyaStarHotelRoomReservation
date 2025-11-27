@@ -31,6 +31,16 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        roomSelectionTableLocal = new javax.swing.JTable();
+        suggestedRoomLabel = new javax.swing.JTextArea();
+        roomNoLabel = new javax.swing.JTextArea();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        roomNoSuggestText = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        enterRoomInput = new javax.swing.JTextArea();
+        Confirm = new javax.swing.JButton();
+        Previous_page = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,13 +50,89 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
         jLabel4.setText("ROOM SELECTION INTERNATIONAL");
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        roomSelectionTableLocal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Destination Type", "Room Type", "Capacity", "Available Rooms", "Price"
+            }
+        ));
+        jScrollPane1.setViewportView(roomSelectionTableLocal);
+
+        suggestedRoomLabel.setEditable(false);
+        suggestedRoomLabel.setColumns(20);
+        suggestedRoomLabel.setRows(5);
+        suggestedRoomLabel.setText("Suggested Room No(s) based \non number of guests:");
+        suggestedRoomLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        suggestedRoomLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        suggestedRoomLabel.setFocusable(false);
+
+        roomNoLabel.setEditable(false);
+        roomNoLabel.setColumns(20);
+        roomNoLabel.setRows(5);
+        roomNoLabel.setText("Enter Room No(s):");
+        roomNoLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roomNoLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        roomNoLabel.setFocusable(false);
+
+        jScrollPane11.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        roomNoSuggestText.setEditable(false);
+        roomNoSuggestText.setColumns(20);
+        roomNoSuggestText.setRows(5);
+        roomNoSuggestText.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        roomNoSuggestText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        roomNoSuggestText.setFocusable(false);
+        jScrollPane11.setViewportView(roomNoSuggestText);
+
+        jScrollPane12.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane12.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        enterRoomInput.setColumns(20);
+        enterRoomInput.setRows(5);
+        enterRoomInput.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        enterRoomInput.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane12.setViewportView(enterRoomInput);
+
+        Confirm.setText("Confirm");
+        Confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmActionPerformed(evt);
+            }
+        });
+
+        Previous_page.setText("Back");
+        Previous_page.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Previous_pageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(roomNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(suggestedRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(Previous_page, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -54,11 +140,33 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(suggestedRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(roomNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Previous_page, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
+
+    }//GEN-LAST:event_ConfirmActionPerformed
+
+    private void Previous_pageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Previous_pageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Previous_pageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -86,6 +194,16 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Confirm;
+    private javax.swing.JButton Previous_page;
+    private javax.swing.JTextArea enterRoomInput;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JTextArea roomNoLabel;
+    private javax.swing.JTextArea roomNoSuggestText;
+    private javax.swing.JTable roomSelectionTableLocal;
+    private javax.swing.JTextArea suggestedRoomLabel;
     // End of variables declaration//GEN-END:variables
 }

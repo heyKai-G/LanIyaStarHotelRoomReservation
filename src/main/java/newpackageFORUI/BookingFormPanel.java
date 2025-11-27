@@ -831,7 +831,7 @@ if (result == JOptionPane.YES_OPTION) {
 
     // === REDIRECT BASED ON DESTINATION TYPE ===
     if (selectedType.equals("Local")) {
-        RoomSelectionForGUESTLocal localForm = new RoomSelectionForGUESTLocal();
+        RoomSelectionForGUESTLocal localForm = new RoomSelectionForGUESTLocal(bookingData);
         localForm.setVisible(true);
         this.dispose(); // close current form
 

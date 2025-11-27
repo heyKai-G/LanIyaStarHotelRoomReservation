@@ -26,6 +26,8 @@ public class BookingData {
 
     private Date checkIn;
     private Date checkOut;
+    
+    private String selectedRoomIdInput;
 
     // ==== GETTERS & SETTERS ====
     public String getBookerName() { return Booker_name; }
@@ -62,6 +64,13 @@ public class BookingData {
     public Date getCheckOut() { return checkOut; }
     public void setCheckOut(Date checkOut) { this.checkOut = checkOut; }
 
+    public String getSelectedRoomIdInput() {
+        return selectedRoomIdInput;
+    }
+
+    public void setSelectedRoomIdInput(String selectedRoomIdInput) {
+        this.selectedRoomIdInput = selectedRoomIdInput;
+    }
    
 
    public void displayBookingData(BookingData data) {

@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 package newpackageFORUI;
 
+import model.BookingData;
 /**
  *
  * @author Lenovo
@@ -12,11 +14,19 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddonSelectionPanel.class.getName());
 
-    /**
-     * Creates new form AddonSelectionPanel
-     */
+    
+    private final BookingData bookingData;
+    
+    
+    // == PANG DEBUG LANG TO ==
     public AddonSelectionPanel() {
+       initComponents();
+       this.bookingData = null;
+    }
+    
+    public AddonSelectionPanel(BookingData data) {
         initComponents();
+        this.bookingData = data; 
     }
 
     /**
@@ -66,7 +76,6 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AddonSelectionPanel().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

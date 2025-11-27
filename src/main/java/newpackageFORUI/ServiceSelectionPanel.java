@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.awt.Cursor;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import model.BookingData;
 
 public class ServiceSelectionPanel extends javax.swing.JFrame {
     
@@ -18,10 +19,12 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
 
     private int gymGuests;
     private int gymSeniorPWD;
+    private final BookingData bookingData;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ServiceSelectionPanel.class.getName());
 
-    public ServiceSelectionPanel() {
+    public ServiceSelectionPanel(BookingData data) {
+        this.bookingData = data;
         initComponents();
         poolPanel.setVisible(false);
         spaPanel.setVisible(false);
@@ -563,7 +566,6 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ServiceSelectionPanel().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
