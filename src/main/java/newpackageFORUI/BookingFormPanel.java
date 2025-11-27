@@ -27,6 +27,8 @@ import model.BookingData;
 
 import java.time.ZoneId; // Needed for date conversion
 import java.time.LocalDate; // Needed for date math
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -644,6 +646,51 @@ String[] internationalDestinations = {
         
        // ============ REQUIRED FIELD VALIDATIONS ============
 
+       // 1. Basic Guest Information
+bookingData.setBooker_name(Booker_name.getText());
+bookingData.setBirthdate(Booker_birthdate.getDate());
+bookingData.setEmail(Booker_email.getText());
+bookingData.setMobile(booker_mobileno.getText());
+
+// 2. Adults & Children
+int adults = Integer.parseInt((String) Howmanyadults_picker.getSelectedItem());
+int children = Integer.parseInt((String) Howmanychildren_picker.getSelectedItem());
+
+bookingData.setAdults(adults);
+bookingData.setChildren(children);
+
+// 3. Child ages (dynamic fields)
+List<Integer> childAges = new ArrayList<>();
+
+for (int i = 0; i < input_ages_box.getComponentCount(); i++) {
+    if (input_ages_box.getComponent(i) instanceof JTextField txt) {
+        try {
+            childAges.add(Integer.parseInt(txt.getText()));
+        } catch (Exception ex) {
+            childAges.add(0); // default if empty
+        }
+    }
+}
+
+bookingData.setChildrenAges(childAges);
+
+// 4. Destination
+bookingData.setDestinationType((String) destination_type_picker.getSelectedItem());
+bookingData.setDestination((String) destination_picker.getSelectedItem());
+
+// 5. Dates
+bookingData.setCheckIn(jDatechooseCheckin.getDate());
+bookingData.setCheckOut(jDateChoosecheckout.getDate());
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
     // --- NAME ---
     String name = Booker_name.getText().trim();
     if (name.isEmpty() || !name.matches("^[A-Za-z ]+$")) {
@@ -681,14 +728,14 @@ String[] internationalDestinations = {
     }
 
     // --- ADULTS ---
-    int adults = Integer.parseInt((String) Howmanyadults_picker.getSelectedItem());
+ 
     if (adults <= 0) {
         JOptionPane.showMessageDialog(this, "Please select number of adults.");
         return;
     }
 
     // --- CHILDREN COUNT ---
-    int children = Integer.parseInt((String) Howmanychildren_picker.getSelectedItem());
+
     if (children < 0) {
         JOptionPane.showMessageDialog(this, "Please select number of children.");
         return;
@@ -780,7 +827,7 @@ if (result == JOptionPane.YES_OPTION) {
     JOptionPane.showMessageDialog(this, "Please review your inputs.");
     return; // stop further execution
 }
-
+bookingData.displayBookingData(bookingData);
         
     }//GEN-LAST:event_ConfirmActionPerformed
 
