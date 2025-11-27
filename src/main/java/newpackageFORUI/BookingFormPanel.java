@@ -770,6 +770,11 @@ if (result == JOptionPane.YES_OPTION) {
     // User clicked YES → proceed with database saving
     JOptionPane.showMessageDialog(this, "Saving to database...");
     // TODO: add your database save logic here
+    
+    // --- REDIRECT TO ANOTHER FORM ---
+    RoomSelectionPanel roomSelection = new RoomSelectionPanel(); // instantiate next form
+    roomSelection.setVisible(true); // show RoomSelectionPanel
+    this.dispose(); // close current BookingFormPanel
 } else {
     // User clicked NO → cancel
     JOptionPane.showMessageDialog(this, "Please review your inputs.");
