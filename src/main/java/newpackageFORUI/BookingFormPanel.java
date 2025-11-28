@@ -448,6 +448,11 @@ String[] internationalDestinations = {
         );
 
         Previous_page.setText("Back");
+        Previous_page.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Previous_pageActionPerformed(evt);
+            }
+        });
 
         Confirm.setText("Confirm");
         Confirm.addActionListener(new java.awt.event.ActionListener() {
@@ -859,6 +864,23 @@ if (result == JOptionPane.YES_OPTION) {
         // TODO add your handling code here:
         updateAgeInputs();
     }//GEN-LAST:event_Howmanychildren_pickerActionPerformed
+
+    private void Previous_pageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Previous_pageActionPerformed
+        // TODO add your handling code here:
+        
+        int result = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to go back to the Main Menu?",
+        "Back Confirmation",
+        JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.YES_OPTION) {
+            // clear all fields
+            MainMenuFrame booking = new MainMenuFrame();
+            booking.setVisible(true);
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_Previous_pageActionPerformed
 
     
     

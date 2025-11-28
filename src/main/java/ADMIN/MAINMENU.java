@@ -17,6 +17,8 @@ public class MAINMENU extends javax.swing.JFrame {
      */
     public MAINMENU() {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -113,6 +115,12 @@ public class MAINMENU extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        // Go to BookingForm
+        roomavailability booking = new roomavailability();
+        booking.setVisible(true);
+        booking.pack();
+        booking.setLocationRelativeTo(null); // Center the new window
+        this.dispose(); // Close MainForm
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

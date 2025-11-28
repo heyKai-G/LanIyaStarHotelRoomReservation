@@ -177,7 +177,7 @@ public class RoomSelectionForGUESTLocal extends javax.swing.JFrame {
         
         String url = "jdbc:mysql://localhost:3306/hotel_reservation";  
         String user = "root";  
-        String password = "password"; 
+        String password = "ballislife2006"; 
 
         // Note: Assuming roomSelectionTableLocal is the JTable variable name
         if (roomSelectionTableLocal == null) {

@@ -172,7 +172,7 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
         
         String url = "jdbc:mysql://localhost:3306/hotel_reservation";  
         String user = "root";  
-        String password = "password"; 
+        String password = "ballislife2006"; 
 
         // Note: Assuming roomSelectionTableLocal is the JTable variable name used in the International form's design
         if (roomSelectionTableLocal == null) {
@@ -554,7 +554,7 @@ try {
     private void Previous_pageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Previous_pageActionPerformed
         // TODO add your handling code here:
         int result = JOptionPane.showConfirmDialog(this,
-        "Confirm? Are you sure you want to go back to Booking Form?",
+        "Are you sure you want to go back to Booking Form?",
         "Back Confirmation",
         JOptionPane.YES_NO_OPTION);
 
