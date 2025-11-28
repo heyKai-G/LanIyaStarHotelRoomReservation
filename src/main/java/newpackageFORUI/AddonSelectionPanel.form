@@ -197,7 +197,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="numberOfBeds" max="32767" attributes="0"/>
-                      <Component id="howManyDaysAreYouGonnaUseTheBeds" alignment="0" max="32767" attributes="0"/>
+                      <Component id="noNights" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel13" min="-2" pref="74" max="-2" attributes="0"/>
@@ -221,7 +221,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="howManyDaysAreYouGonnaUseTheBeds" min="-2" max="-2" attributes="0"/>
+                  <Component id="noNights" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -277,9 +277,9 @@
             <Property name="text" type="java.lang.String" value="No. of Beds:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="howManyDaysAreYouGonnaUseTheBeds">
+        <Component class="javax.swing.JTextField" name="noNights">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="howManyDaysAreYouGonnaUseTheBedsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="noNightsActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">

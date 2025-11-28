@@ -29,6 +29,14 @@ public class BookingData {
     
     private String selectedRoomIdInput;
     
+    // ELIJAH -> = = = START: Fields for Add-ons (Bed, Blanket, Pillow, Toiletries) = = = 
+    private int numBeds;
+    private int numNightsBed;
+    private int numBlankets;
+    private int numPillows;
+    private int numToiletries;
+    // ELIJAH -> = = = END: Fields for Add-ons = = =
+    
     // ELIJAH -> = = = START: New Fields for Service Selection = = = 
     private int poolGuests;
     private int poolSeniorPWD;
@@ -77,9 +85,27 @@ public class BookingData {
 
     public void setSelectedRoomIdInput(String selectedRoomIdInput) { this.selectedRoomIdInput = selectedRoomIdInput; }
     
-    // ELIJAH -> = = = START: New Getters & Setters for Service Selection = = =
+    // ELIJAH -> = = = START: New Getters & Setters for Add-ons = = =
+    public int getNumBeds() { return numBeds; }
+    public void setNumBeds(int numBeds) { this.numBeds = numBeds; }
+    
+    public int getNumNightsBed() { return numNightsBed; }
+    public void setNumNightsBed(int numNightsBed) { this.numNightsBed = numNightsBed; }
+
+    public int getNumBlankets() { return numBlankets; }
+    public void setNumBlankets(int numBlankets) { this.numBlankets = numBlankets; }
+
+    public int getNumPillows() { return numPillows; }
+    public void setNumPillows(int numPillows) { this.numPillows = numPillows; }
+
+    public int getNumToiletries() { return numToiletries; }
+    public void setNumToiletries(int numToiletries) { this.numToiletries = numToiletries; }
+    // ELIJAH -> = = = END: New Getters & Setters for Add-ons = = = 
+
+    // ELIJAH -> = = = START: Original Getters & Setters for Service Selection = = =
     public int getPoolGuests() { return poolGuests; } 
     public void setPoolGuests(int poolGuests) { this.poolGuests = poolGuests; }
+    // ... (keep the rest of the original pool/spa/gym getters and setters)
 
     public int getPoolSeniorPWD() { return poolSeniorPWD; }
     public void setPoolSeniorPWD(int poolSeniorPWD) { this.poolSeniorPWD = poolSeniorPWD; }

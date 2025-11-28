@@ -14,7 +14,12 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddonSelectionPanel.class.getName());
 
-    
+    private int numBeds;
+    private int numNightsBed;
+    private int numBlankets;
+    private int numPillows;
+    private int numToiletries;
+    private BookingData bookingData; // Store the passed-in data object
    
     
     
@@ -30,6 +35,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
        initComponents();
        this.setResizable(false);
        this.setLocationRelativeTo(null);
+       this.bookingData = data;
         
     }
 
@@ -52,7 +58,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         numberOfBeds = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        howManyDaysAreYouGonnaUseTheBeds = new javax.swing.JTextField();
+        noNights = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -163,9 +169,9 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
 
         jLabel13.setText("No. of Beds:");
 
-        howManyDaysAreYouGonnaUseTheBeds.addActionListener(new java.awt.event.ActionListener() {
+        noNights.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                howManyDaysAreYouGonnaUseTheBedsActionPerformed(evt);
+                noNightsActionPerformed(evt);
             }
         });
 
@@ -180,7 +186,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(numberOfBeds)
-                    .addComponent(howManyDaysAreYouGonnaUseTheBeds)
+                    .addComponent(noNights)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +205,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(howManyDaysAreYouGonnaUseTheBeds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(noNights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -574,12 +580,45 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        
+        try {
+            // 1. Get text from fields and parse to Integer. Default to 0 if empty.
+            numBeds = numberOfBeds.getText().isEmpty() ? 0 : Integer.parseInt(numberOfBeds.getText());
+            numNightsBed = noNights.getText().isEmpty() ? 0 : Integer.parseInt(noNights.getText());
+            numBlankets = BLANKET.getText().isEmpty() ? 0 : Integer.parseInt(BLANKET.getText());
+            numPillows = PILLOW.getText().isEmpty() ? 0 : Integer.parseInt(PILLOW.getText());
+            numToiletries = TOILETRIES.getText().isEmpty() ? 0 : Integer.parseInt(TOILETRIES.getText());
+
+            // 2. Store the parsed values into the BookingData object
+            if (bookingData != null) {
+                bookingData.setNumBeds(numBeds);
+                bookingData.setNumNightsBed(numNightsBed);
+                bookingData.setNumBlankets(numBlankets);
+                bookingData.setNumPillows(numPillows);
+                bookingData.setNumToiletries(numToiletries);
+                
+                // For verification/debug:
+                System.out.println("--- Add-on Data Stored in BookingData ---");
+                System.out.println("Beds: " + bookingData.getNumBeds());
+                System.out.println("Nights for Bed: " + bookingData.getNumNightsBed());
+                System.out.println("Blankets: " + bookingData.getNumBlankets());
+                System.out.println("Pillows: " + bookingData.getNumPillows());
+                System.out.println("Toiletries: " + bookingData.getNumToiletries());
+                System.out.println("----------------------------------------");
+                
+                // TODO: Add logic to transition to the next panel/screen here.
+            }
+            
+        } catch (NumberFormatException e) {
+            // Handle case where user enters non-numeric text in a field
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter valid whole numbers for the add-ons.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            logger.log(java.util.logging.Level.WARNING, "Invalid number format in Add-on fields", e);
+        }
+        // ELIJAH -> END: Store data from Add-on fields
     }//GEN-LAST:event_confirmButtonActionPerformed
 
-    private void howManyDaysAreYouGonnaUseTheBedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_howManyDaysAreYouGonnaUseTheBedsActionPerformed
+    private void noNightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNightsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_howManyDaysAreYouGonnaUseTheBedsActionPerformed
+    }//GEN-LAST:event_noNightsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -611,7 +650,6 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     private javax.swing.JTextField TOILETRIES;
     private javax.swing.JButton backButton;
     private javax.swing.JButton confirmButton;
-    private javax.swing.JTextField howManyDaysAreYouGonnaUseTheBeds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -645,6 +683,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField noNights;
     private javax.swing.JTextField numberOfBeds;
     // End of variables declaration//GEN-END:variables
 }
