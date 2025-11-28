@@ -28,6 +28,15 @@ public class BookingData {
     private Date checkOut;
     
     private String selectedRoomIdInput;
+    
+    // ELIJAH -> = = = START: New Fields for Service Selection = = = 
+    private int poolGuests;
+    private int poolSeniorPWD;
+    private int spaGuests;
+    private int spaSeniorPWD;
+    private int gymGuests;
+    private int gymSeniorPWD;
+    // = = = END: New Fields for Service Selection = = = 
 
     // ==== GETTERS & SETTERS ====
     public String getBookerName() { return Booker_name; }
@@ -64,13 +73,29 @@ public class BookingData {
     public Date getCheckOut() { return checkOut; }
     public void setCheckOut(Date checkOut) { this.checkOut = checkOut; }
 
-    public String getSelectedRoomIdInput() {
-        return selectedRoomIdInput;
-    }
+    public String getSelectedRoomIdInput() { return selectedRoomIdInput; }
 
-    public void setSelectedRoomIdInput(String selectedRoomIdInput) {
-        this.selectedRoomIdInput = selectedRoomIdInput;
-    }
+    public void setSelectedRoomIdInput(String selectedRoomIdInput) { this.selectedRoomIdInput = selectedRoomIdInput; }
+    
+    // ELIJAH -> = = = START: New Getters & Setters for Service Selection = = =
+    public int getPoolGuests() { return poolGuests; } 
+    public void setPoolGuests(int poolGuests) { this.poolGuests = poolGuests; }
+
+    public int getPoolSeniorPWD() { return poolSeniorPWD; }
+    public void setPoolSeniorPWD(int poolSeniorPWD) { this.poolSeniorPWD = poolSeniorPWD; }
+
+    public int getSpaGuests() { return spaGuests; }
+    public void setSpaGuests(int spaGuests) { this.spaGuests = spaGuests; }
+
+    public int getSpaSeniorPWD() { return spaSeniorPWD; }
+    public void setSpaSeniorPWD(int spaSeniorPWD) { this.spaSeniorPWD = spaSeniorPWD; }
+
+    public int getGymGuests() { return gymGuests; }
+    public void setGymGuests(int gymGuests) { this.gymGuests = gymGuests; }
+
+    public int getGymSeniorPWD() { return gymSeniorPWD; }
+    public void setGymSeniorPWD(int gymSeniorPWD) { this.gymSeniorPWD = gymSeniorPWD; }
+    // = = = END: New Getters & Setters for Service Selection = = = 
    
 
    public void displayBookingData(BookingData data) {
