@@ -159,7 +159,7 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
         // Update the label with the determined season
         if (bookingData != null && bookingData.getCheckIn() != null) {
             // Note: Assuming a JLabel named jLabel4 exists on the form
-            jLabel4.setText("ROOM SELECTION LOCAL - " + this.determinedSeason.toUpperCase());
+            jLabel4.setText("ROOM SELECTION INTERNATIONAL - " + this.determinedSeason.toUpperCase());
         }
     }
     
@@ -174,9 +174,9 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
         String user = "root";  
         String password = "password"; 
 
-        // Note: Assuming roomSelectionTableLocal is the JTable variable name
+        // Note: Assuming roomSelectionTableLocal is the JTable variable name used in the International form's design
         if (roomSelectionTableLocal == null) {
-            logger.log(Level.SEVERE, "roomSelectionTableLocal is null. Cannot load data.");
+            logger.log(Level.SEVERE, "roomSelectionTableLocal is null. Cannot load International data.");
             return;
         }
         
@@ -185,8 +185,8 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
         model.setColumnIdentifiers(new Object[]{"ID", "Destination Type", "Room Type", "Capacity", "Available Rooms", determinedSeason + " Price"});
         model.setRowCount(0); // clear existing rows
 
-        // Use the dynamic rate column in the SQL query
-        String sql = "SELECT id, destination_type, room_type, capacity, available_rooms, " + selectedRateColumn + " FROM roomrates_local";
+        // Use the dynamic rate column in the SQL query and target the international table
+        String sql = "SELECT id, destination_type, room_type, capacity, available_rooms, " + selectedRateColumn + " FROM roomrates_international"; // <<< Target table changed to international
         
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = conn.prepareStatement(sql);
@@ -208,10 +208,11 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
             }
 
         } catch (SQLException e) {
+            // Corrected messages for International data loading
             JOptionPane.showMessageDialog(this,
-                    "Error loading Local data for Room Selection:\n" + e.getMessage(),
+                    "Error loading International data for Room Selection:\n" + e.getMessage(),
                     "Database Error", JOptionPane.ERROR_MESSAGE);
-            logger.log(Level.SEVERE, "Database loading error (Local) in RoomSelection", e);
+            logger.log(Level.SEVERE, "Database loading error (International) in RoomSelection", e); // <<< Corrected log message
         }
     }
     
@@ -495,53 +496,59 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
-        String roomInput = enterRoomInput.getText().trim();
+       String roomInput = enterRoomInput.getText().trim();
 
-        if (roomInput.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter a Room ID.", "Input Error", JOptionPane.WARNING_MESSAGE);
-            return;
+if (roomInput.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Please enter a Room ID.", "Input Error", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+try {
+    int selectedRoomId = Integer.parseInt(roomInput);
+
+    // 1. Check if the room exists and is available
+    if (checkRoomAvailability(selectedRoomId)) {
+        // 2. Save Data
+        bookingData.setSelectedRoomIdInput(roomInput);
+
+        // 3. Confirmation Dialog
+        int result = JOptionPane.showConfirmDialog(this,
+            // Displaying the room ID for better user confirmation
+            "You have selected Room ID: " + roomInput + ".\n\n"
+            + "Confirm selection and proceed to Add-on Selection?",
+            "Confirm Room Selection",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE); // QUESTION_MESSAGE is a suitable icon
+
+        if (result == JOptionPane.YES_OPTION) {
+            // 4. Transition to next panel (AddonSelectionPanel)
+            try {
+                // Original transition code wrapped here
+                Class<?> addonClass = Class.forName("newpackageFORUI.AddonSelectionPanel");
+                java.lang.reflect.Constructor<?> constructor = addonClass.getConstructor(model.BookingData.class);
+                javax.swing.JFrame addonPanel = (javax.swing.JFrame) constructor.newInstance(bookingData);
+
+                addonPanel.setVisible(true);
+                this.dispose(); // close current window
+
+            } catch (ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(this,
+                    "Error: AddonSelectionPanel class not found. Please create this file.",
+                    "Missing Class", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Error creating/showing AddonSelectionPanel", e);
+                JOptionPane.showMessageDialog(this, "Error starting next step.", "System Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+        // If the user selects NO, the confirmation dialog simply closes,
+        // and they remain on the current Room Selection screen.
 
-        try {
-            int selectedRoomId = Integer.parseInt(roomInput);
+    }
+    // If checkRoomAvailability returns false, it already showed an error message.
 
-            // 1. Check if the room exists and is available
-            if (checkRoomAvailability(selectedRoomId)) {
-                // 2. Save Data
-                bookingData.setSelectedRoomIdInput(roomInput);
-                
-                // 3. Transition to next panel
-                // NOTE: You must create AddonSelectionPanel.java in the same package (newpackageFORUI)
-                // and give it a constructor that accepts a BookingData object.
-                try {
-                    // Assuming the class is named AddonSelectionPanel and is in the same package
-                    // Reflection is used here for demonstration since the file is not provided. 
-                    // Use direct instantiation if AddonSelectionPanel is defined:
-                    // AddonSelectionPanel addonPanel = new AddonSelectionPanel(bookingData);
-                    
-                    Class<?> addonClass = Class.forName("newpackageFORUI.AddonSelectionPanel");
-                    java.lang.reflect.Constructor<?> constructor = addonClass.getConstructor(model.BookingData.class);
-                    javax.swing.JFrame addonPanel = (javax.swing.JFrame) constructor.newInstance(bookingData);
-                    
-                    addonPanel.setVisible(true);
-                    this.dispose();
-
-                } catch (ClassNotFoundException e) {
-                    JOptionPane.showMessageDialog(this, 
-                        "Error: AddonSelectionPanel class not found. Please create this file.", 
-                        "Missing Class", JOptionPane.ERROR_MESSAGE);
-                } catch (Exception e) {
-                    logger.log(Level.SEVERE, "Error creating/showing AddonSelectionPanel", e);
-                    JOptionPane.showMessageDialog(this, "Error starting next step.", "System Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-
-            } 
-            // If checkRoomAvailability returns false, it already showed an error message.
-            
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid Room ID. Please enter a single whole number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Invalid Room ID. Please enter a single whole number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+}
     }//GEN-LAST:event_ConfirmActionPerformed
 
     private void Previous_pageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Previous_pageActionPerformed

@@ -836,7 +836,7 @@ if (result == JOptionPane.YES_OPTION) {
         this.dispose(); // close current form
 
     } else if (selectedType.equals("International")) {
-        RoomSelectionForGuestInternational internationalForm = new RoomSelectionForGuestInternational();
+        RoomSelectionForGuestInternational internationalForm = new RoomSelectionForGuestInternational(bookingData);
         internationalForm.setVisible(true);
         this.dispose(); // close current form
     }
