@@ -582,11 +582,12 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         try {
             // 1. Get text from fields and parse to Integer. Default to 0 if empty.
-            numBeds = numberOfBeds.getText().isEmpty() ? 0 : Integer.parseInt(numberOfBeds.getText());
-            numNightsBed = noNights.getText().isEmpty() ? 0 : Integer.parseInt(noNights.getText());
-            numBlankets = BLANKET.getText().isEmpty() ? 0 : Integer.parseInt(BLANKET.getText());
-            numPillows = PILLOW.getText().isEmpty() ? 0 : Integer.parseInt(PILLOW.getText());
-            numToiletries = TOILETRIES.getText().isEmpty() ? 0 : Integer.parseInt(TOILETRIES.getText());
+            // Note: Integer.parseInt will throw NumberFormatException if the input is not a number.
+            numBeds = numberOfBeds.getText().isEmpty() ? 0 : Integer.parseInt(numberOfBeds.getText().trim());
+            numNightsBed = noNights.getText().isEmpty() ? 0 : Integer.parseInt(noNights.getText().trim());
+            numBlankets = BLANKET.getText().isEmpty() ? 0 : Integer.parseInt(BLANKET.getText().trim());
+            numPillows = PILLOW.getText().isEmpty() ? 0 : Integer.parseInt(PILLOW.getText().trim());
+            numToiletries = TOILETRIES.getText().isEmpty() ? 0 : Integer.parseInt(TOILETRIES.getText().trim());
 
             // 2. Store the parsed values into the BookingData object
             if (bookingData != null) {
@@ -595,7 +596,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
                 bookingData.setNumBlankets(numBlankets);
                 bookingData.setNumPillows(numPillows);
                 bookingData.setNumToiletries(numToiletries);
-                
+
                 // For verification/debug:
                 System.out.println("--- Add-on Data Stored in BookingData ---");
                 System.out.println("Beds: " + bookingData.getNumBeds());
@@ -605,15 +606,47 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
                 System.out.println("Toiletries: " + bookingData.getNumToiletries());
                 System.out.println("----------------------------------------");
                 
-                // TODO: Add logic to transition to the next panel/screen here.
+            } else {
+                 // Should not happen if the flow is correct, but good for safety
+                 javax.swing.JOptionPane.showMessageDialog(this, "Booking data not initialized.", "System Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                 return;
             }
-            
+
+            // --- New Logic: Confirmation and Transition ---
+
+            // 3. Confirmation Dialog
+            int result = javax.swing.JOptionPane.showConfirmDialog(this,
+                    "Confirm add-on selections and proceed to Service Selection?",
+                    "Confirm Add-ons",
+                    javax.swing.JOptionPane.YES_NO_OPTION,
+                    javax.swing.JOptionPane.QUESTION_MESSAGE);
+
+            if (result == javax.swing.JOptionPane.YES_OPTION) {
+                // 4. Transition to next panel (ServiceSelectionPanel)
+                try {
+                    Class<?> serviceClass = Class.forName("newpackageFORUI.ServiceSelectionPanel");
+                    java.lang.reflect.Constructor<?> constructor = serviceClass.getConstructor(model.BookingData.class);
+                    javax.swing.JFrame servicePanel = (javax.swing.JFrame) constructor.newInstance(bookingData);
+
+                    servicePanel.setVisible(true);
+                    this.dispose(); // close current window
+
+                } catch (ClassNotFoundException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this,
+                            "Error: ServiceSelectionPanel class not found. Please create this file in the 'newpackageFORUI' package.",
+                            "Missing Class", javax.swing.JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e) {
+                    logger.log(java.util.logging.Level.SEVERE, "Error creating/showing ServiceSelectionPanel", e);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error starting next step.", "System Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+
         } catch (NumberFormatException e) {
             // Handle case where user enters non-numeric text in a field
             javax.swing.JOptionPane.showMessageDialog(this, "Please enter valid whole numbers for the add-ons.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             logger.log(java.util.logging.Level.WARNING, "Invalid number format in Add-on fields", e);
-        }
-        // ELIJAH -> END: Store data from Add-on fields
+        }     
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void noNightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNightsActionPerformed

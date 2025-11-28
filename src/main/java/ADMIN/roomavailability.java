@@ -49,7 +49,7 @@ public class roomavailability extends javax.swing.JFrame {
         // NOTE: Replace these with your actual database credentials
         String url = "jdbc:mysql://localhost:3306/hotel_reservation";  
         String user = "root";  
-        String password = "ballislife2006"; 
+        String password = "password"; 
 
         // CRITICAL CHECK: Ensure roomTable is initialized before attempting to use it.
         if (roomTableLocal == null) {
@@ -100,7 +100,7 @@ public class roomavailability extends javax.swing.JFrame {
         // NOTE: Uses the same credentials, adjust if necessary
         String url = "jdbc:mysql://localhost:3306/hotel_reservation";  
         String user = "root";  
-        String password = "ballislife2006"; 
+        String password = "password"; 
 
         if (roomTableLocal == null) {
             logger.log(Level.SEVERE, "roomTableLocal is null. Cannot load data.");

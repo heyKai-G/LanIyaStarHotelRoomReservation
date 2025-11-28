@@ -172,7 +172,7 @@ public class RoomSelectionForGuestInternational extends javax.swing.JFrame {
         
         String url = "jdbc:mysql://localhost:3306/hotel_reservation";  
         String user = "root";  
-        String password = "ballislife2006"; 
+        String password = "password"; 
 
         // Note: Assuming roomSelectionTableLocal is the JTable variable name used in the International form's design
         if (roomSelectionTableLocal == null) {
