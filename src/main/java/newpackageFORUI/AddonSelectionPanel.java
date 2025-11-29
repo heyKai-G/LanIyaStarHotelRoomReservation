@@ -1,11 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 package newpackageFORUI;
 
 import model.BookingData;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.util.concurrent.TimeUnit; // Needed for date calculation
+
 /**
  *
  * @author Lenovo
@@ -20,6 +22,9 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     private int numPillows;
     private int numToiletries;
     private BookingData bookingData; // Store the passed-in data object
+    
+    // *** FIELD TO STORE CALCULATED MINIMUM BEDS ***
+    private int minBeds;
    
     
     
@@ -28,7 +33,9 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
        initComponents();
        this.setResizable(false);
        this.setLocationRelativeTo(null);
-       
+       // For debug, set a default minimum
+       this.minBeds = 0; // Initialize to 0 for debug
+       initializeNumberOfBedsLogic();
     }
     
     public AddonSelectionPanel(BookingData data) {
@@ -36,8 +43,96 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
        this.setResizable(false);
        this.setLocationRelativeTo(null);
        this.bookingData = data;
+       
+       // *** CALL INITIALIZATION LOGIC IN PARAMETERIZED CONSTRUCTOR ***
+       initializeNumberOfBedsLogic();
         
     }
+
+    /**
+     * Extracts the minimum additional bed count based on the Room ID.
+     * Maps: ID 1-4 -> 1, ID 5 -> 0, others -> 0.
+     */
+    private int getMinBedsByRoomId(String selectedRoomIdInput) {
+        if (selectedRoomIdInput == null || selectedRoomIdInput.isEmpty()) {
+            return 0;
+        }
+        
+        try {
+            int roomId = Integer.parseInt(selectedRoomIdInput);
+            
+            // Your required mapping logic
+            if (roomId >= 1 && roomId <= 4) {
+                return 1;
+            } else if (roomId == 5) {
+                return 0;
+            } else {
+                return 0;
+            }
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "Error parsing room ID from BookingData: " + selectedRoomIdInput, e);
+            return 0; // Default to 0 if ID is invalid
+        }
+    }
+    
+    /**
+     * Calculates the minimum beds, updates the label, and initializes the text field.
+     */
+    private void initializeNumberOfBedsLogic() {
+        if (this.bookingData != null) {
+            // 1. Get the room ID input
+            String roomId = this.bookingData.getSelectedRoomIdInput(); 
+            
+            // 2. Calculate the minimum number of beds based on the ID
+            // NOTE: The previous getMinBeds(String capacityString) is now replaced/superseded by this logic
+            this.minBeds = getMinBedsByRoomId(roomId);
+        } else {
+            // Safety default if bookingData is null (e.g., using the debug constructor)
+            this.minBeds = 0; 
+        }
+
+        if (this.minBeds > 0) {
+            // 3. Update the label (jLabel13) to display the minimum
+            // Format: No. of Beds (Min. 1)
+            jLabel13.setText("No. of Beds (Min. " + this.minBeds + ")");
+            
+            // 4. Initialize the numberOfBeds JTextField with the minimum value
+            numberOfBeds.setText(String.valueOf(this.minBeds));
+            
+            // 5. Initialize the BookingData model with the minimum value
+            if (this.bookingData != null) {
+                 this.bookingData.setNumBeds(this.minBeds); 
+            }
+        } else {
+             // If minimum is 0, just use the original default label text.
+             jLabel13.setText("No. of Beds:");
+             // Clear the text field, as there is no minimum to default to
+             numberOfBeds.setText(""); 
+             
+             // Also reset the model value to 0
+             if (this.bookingData != null) {
+                 this.bookingData.setNumBeds(0); 
+            }
+        }
+    }
+
+
+    /**
+     * Calculates the total number of nights between check-in and check-out.
+     */
+    private long getTotalNights() {
+        if (bookingData == null || bookingData.getCheckIn() == null || bookingData.getCheckOut() == null) {
+            return 0; // Cannot calculate if dates are missing
+        }
+        
+        long diffInMillies = Math.abs(bookingData.getCheckOut().getTime() - bookingData.getCheckIn().getTime());
+        // Convert milliseconds to days
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        
+        // Return 0 if check-in >= check-out (should be handled in a previous panel, but safe check)
+        return diff > 0 ? diff : 0; 
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,7 +284,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
                     .addComponent(noNights)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -380,7 +475,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,15 +567,14 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +629,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -580,14 +674,42 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        try {
+      try {
             // 1. Get text from fields and parse to Integer. Default to 0 if empty.
-            // Note: Integer.parseInt will throw NumberFormatException if the input is not a number.
             numBeds = numberOfBeds.getText().isEmpty() ? 0 : Integer.parseInt(numberOfBeds.getText().trim());
             numNightsBed = noNights.getText().isEmpty() ? 0 : Integer.parseInt(noNights.getText().trim());
             numBlankets = BLANKET.getText().isEmpty() ? 0 : Integer.parseInt(BLANKET.getText().trim());
             numPillows = PILLOW.getText().isEmpty() ? 0 : Integer.parseInt(PILLOW.getText().trim());
             numToiletries = TOILETRIES.getText().isEmpty() ? 0 : Integer.parseInt(TOILETRIES.getText().trim());
+            
+            // *** VALIDATION LOGIC 1: MINIMUM BEDS ***
+            if (numBeds < this.minBeds) {
+                JOptionPane.showMessageDialog(this, 
+                        "The minimum number of beds required is " + this.minBeds + 
+                        ". Please adjust your selection or keep the default value.", 
+                        "Minimum Requirement Not Met", 
+                        JOptionPane.ERROR_MESSAGE);
+                numberOfBeds.setText(String.valueOf(this.minBeds)); // Reset to minimum
+                return;
+            }
+            // **********************************************
+            
+            // *** VALIDATION LOGIC 2: MAXIMUM NIGHTS FOR BED ADD-ON ***
+            long totalNights = getTotalNights();
+            
+            // Only validate if a number of beds was selected AND if totalNights > 0
+            if (numBeds > 0 && numNightsBed > totalNights) {
+                 JOptionPane.showMessageDialog(this, 
+                        "The number of nights for the extra bed (" + numNightsBed + " nights) " +
+                        "cannot exceed the total duration of your stay (" + totalNights + " nights).", 
+                        "Max Nights Exceeded", 
+                        JOptionPane.ERROR_MESSAGE);
+                // The user can choose to reset to max nights, or just clear, I'll clear for re-entry
+                noNights.setText(""); 
+                return;
+            }
+            // **********************************************************
+
 
             // 2. Store the parsed values into the BookingData object
             if (bookingData != null) {
@@ -646,7 +768,7 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
             // Handle case where user enters non-numeric text in a field
             javax.swing.JOptionPane.showMessageDialog(this, "Please enter valid whole numbers for the add-ons.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             logger.log(java.util.logging.Level.WARNING, "Invalid number format in Add-on fields", e);
-        }     
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void noNightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNightsActionPerformed
@@ -674,6 +796,17 @@ public class AddonSelectionPanel extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
         /* Create and display the form */
     }
 
