@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package newpackageFORUI;
-
+import model.BookingData;
 /**
  *
  * @author Lenovo
@@ -11,11 +11,19 @@ package newpackageFORUI;
 public class PaymentPanelCard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentPanelCard.class.getName());
-
+private final BookingData bookingData; // <-- ADDED FIELD
     /**
      * Creates new form PaymentPanelCard
      */
     public PaymentPanelCard() {
+        initComponents();
+        setLocationRelativeTo(null);   
+        this.bookingData = null; // Set null for design mode
+     
+    }
+    
+    public PaymentPanelCard(BookingData bookingData) { // <-- ADDED CONSTRUCTOR
+        this.bookingData = bookingData;
         initComponents();
         setLocationRelativeTo(null);   
     }

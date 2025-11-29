@@ -23,7 +23,7 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
         javax.swing.ButtonGroup paymentGroup = new javax.swing.ButtonGroup();
         paymentGroup.add(jCashButton);
         paymentGroup.add(jCreditButton);
-        setLocationRelativeTo(null);   
+        setLocationRelativeTo(null);
     }
     
 
@@ -141,31 +141,42 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jCreditButtonActionPerformed
 
     private void jCashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCashButtonActionPerformed
-  
+  // Check if any payment mode is selected
+        if (!jCashButton.isSelected() && !jCreditButton.isSelected()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a mode of payment first.", "Selection Required", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Dispose of the current panel (PaymentPanelMainMenu)
+        this.dispose();
+
+        // Open the selected payment panel, passing the BookingData object
+        if (jCashButton.isSelected()) {
+            PaymentPanelCash cashPanel = new PaymentPanelCash(bookingData);
+            cashPanel.setVisible(true);
+        } else if (jCreditButton.isSelected()) {
+            PaymentPanelCard cardPanel = new PaymentPanelCard(bookingData); 
+            cardPanel.setVisible(true);
+        }
     }//GEN-LAST:event_jCashButtonActionPerformed
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
-          
-    if (!jCashButton.isSelected() && !jCreditButton.isSelected()) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Please select a mode of payment first.",
-                "Selection Required",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+     // Check if any payment mode is selected
+        if (!jCashButton.isSelected() && !jCreditButton.isSelected()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a mode of payment first.", "Selection Required", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    if (jCashButton.isSelected()) {
-        // OPEN CASH WINDOW
-      
+        // Dispose of the current panel (PaymentPanelMainMenu)
+        this.dispose();
 
-        this.dispose(); // close current menu
-    }
-
-    if (jCreditButton.isSelected()) {
-        // OPEN CARD WINDOW
-        PaymentPanelCard cardWindow = new PaymentPanelCard();
-        cardWindow.setVisible(true);
-        this.dispose(); // close current menu
+        // Open the selected payment panel, passing the BookingData object
+        if (jCashButton.isSelected()) {
+            PaymentPanelCash cashPanel = new PaymentPanelCash(bookingData);
+            cashPanel.setVisible(true);
+        } else if (jCreditButton.isSelected()) {
+            PaymentPanelCard cardPanel = new PaymentPanelCard(bookingData); 
+            cardPanel.setVisible(true);
         }
     }//GEN-LAST:event_jConfirmActionPerformed
 

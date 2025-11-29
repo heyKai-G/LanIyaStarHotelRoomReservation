@@ -332,7 +332,12 @@ public class BookingSummaryPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
- 
+ // 1. Hide the current window
+        this.setVisible(false);
+        
+        // 2. Open the PaymentPanelMainMenu, passing the BookingData object
+        PaymentPanelMainMenu paymentMenu = new PaymentPanelMainMenu(bookingData);
+        paymentMenu.setVisible(true);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
