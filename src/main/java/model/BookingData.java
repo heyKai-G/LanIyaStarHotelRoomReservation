@@ -60,6 +60,11 @@ public class BookingData {
     private int tm_pwdSenior;
     private int tm_days;
     // END: Fields for Services
+    
+    private String determinedSeason; // <<< ADDED
+    private String selectedRateColumn; // <<< ADDED
+    
+    private double grandTotal;
 
 
     // ==== GETTERS & SETTERS ====
@@ -173,6 +178,15 @@ public class BookingData {
     public String getSelectedRoomCapacity() { return selectedRoomCapacity; }
 
 public void setSelectedRoomCapacity(String selectedRoomCapacity) { this.selectedRoomCapacity = selectedRoomCapacity; }
+
+public String getDeterminedSeason() { return determinedSeason; }
+    public void setDeterminedSeason(String determinedSeason) { this.determinedSeason = determinedSeason; }
+
+    public String getSelectedRateColumn() { return selectedRateColumn; }
+    public void setSelectedRateColumn(String selectedRateColumn) { this.selectedRateColumn = selectedRateColumn; }
+    
+    public double getGrandTotal() { return grandTotal; }
+    public void setGrandTotal(double grandTotal) { this.grandTotal = grandTotal; }
     
     // END: New Getters & Setters for Services
 

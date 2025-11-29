@@ -157,8 +157,8 @@ public class PaymentPanelCard extends javax.swing.JFrame {
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed
         // TODO add your handling code here:
-        PaymentPanelMainMenu menu = new PaymentPanelMainMenu();
-        menu.setVisible(true);
+       
+      
     this.dispose();
     }//GEN-LAST:event_jBackButtonActionPerformed
 

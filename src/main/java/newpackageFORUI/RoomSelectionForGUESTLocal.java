@@ -515,6 +515,10 @@ try {
     if (checkRoomAvailability(selectedRoomId)) {
         // 2. Save Data
         bookingData.setSelectedRoomIdInput(roomInput);
+        
+        // --- NEW: Save Season and Rate Column (Local) ---
+        bookingData.setDeterminedSeason(this.determinedSeason); // <<< ADDED
+        bookingData.setSelectedRateColumn(this.selectedRateColumn); // <<< ADDED
 
         // 3. Confirmation Dialog
         int result = JOptionPane.showConfirmDialog(this,

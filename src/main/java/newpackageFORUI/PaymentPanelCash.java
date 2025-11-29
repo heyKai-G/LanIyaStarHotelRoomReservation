@@ -4,6 +4,7 @@
  */
 package newpackageFORUI;
 
+import model.BookingData;
 /**
  *
  * @author Lenovo
@@ -11,11 +12,12 @@ package newpackageFORUI;
 public class PaymentPanelCash extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentPanelCash.class.getName());
-
+ private final BookingData bookingData;
     /**
      * Creates new form PaymentPanelCash
      */
-    public PaymentPanelCash() {
+    public PaymentPanelCash(BookingData bookingData) {
+         this.bookingData = bookingData;
         initComponents();
         setLocationRelativeTo(null);   
     }
@@ -155,8 +157,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed
         // TODO add your handling code here:
-        PaymentPanelMainMenu menu = new PaymentPanelMainMenu();
-        menu.setVisible(true);
+    
         this.dispose();
     }//GEN-LAST:event_jBackButtonActionPerformed
 
@@ -182,7 +183,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PaymentPanelCash().setVisible(true));
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

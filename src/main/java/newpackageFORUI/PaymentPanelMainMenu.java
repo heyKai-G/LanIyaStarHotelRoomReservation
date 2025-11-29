@@ -4,18 +4,21 @@
  */
 package newpackageFORUI;
 
+import model.BookingData;
+
 /**
  *
  * @author Lenovo
  */
 public class PaymentPanelMainMenu extends javax.swing.JFrame {
-    
+    private final BookingData bookingData;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentPanelMainMenu.class.getName());
 
     /**
      * Creates new form PaymentPanel
      */
-    public PaymentPanelMainMenu() {
+    public PaymentPanelMainMenu(BookingData bookingData) {
+        this.bookingData = bookingData;
         initComponents();
         javax.swing.ButtonGroup paymentGroup = new javax.swing.ButtonGroup();
         paymentGroup.add(jCashButton);
@@ -153,8 +156,8 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
 
     if (jCashButton.isSelected()) {
         // OPEN CASH WINDOW
-        PaymentPanelCash cashWindow = new PaymentPanelCash();
-        cashWindow.setVisible(true);
+      
+
         this.dispose(); // close current menu
     }
 
@@ -168,8 +171,6 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
 
     private void jBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackActionPerformed
         // TODO add your handling code here:
-        BookingSummaryPanel summary = new BookingSummaryPanel();
-        summary.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBackActionPerformed
 
@@ -195,7 +196,7 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PaymentPanelMainMenu().setVisible(true));
+     
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

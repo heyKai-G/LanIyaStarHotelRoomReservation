@@ -247,6 +247,9 @@ public class ServiceSelectionPanel extends javax.swing.JFrame {
         jPanel5.add(jLabel2);
         jLabel2.setBounds(0, 0, 260, 40);
 
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
         jTextArea3.setText(" • Swimming Pool: \nPhp 300.00/day per person\n• Gym Php: \n500.00/day per person\n\nSPA:\n• Foot Spa:\nPhp 825.00 for 45 minutes\n\n• Aroma Facial Massage:\nPhp 1,045.00 for 45 minutes\n\n• Thai Massage:\nPhp 1,540.00 for 75 minutes");
@@ -543,15 +546,22 @@ int result = JOptionPane.showConfirmDialog(this,
             
             // proceed to PaymentPanel
             // NOTE: Assuming PaymentPanelMainMenu exists and is accessible.
+            // proceed to BookingSummaryPanel
             try {
-                // Use reflection to create an instance, as the class might not be defined in this file.
-                Class<?> paymentClass = Class.forName("newpackageFORUI.PaymentPanelMainMenu");
-                JFrame payment = (JFrame) paymentClass.getDeclaredConstructor().newInstance();
-                payment.setVisible(true);
+   
+                    
+                    
+                Class<?> summaryClass = Class.forName("newpackageFORUI.BookingSummaryPanel");
+                java.lang.reflect.Constructor<?> constructor = summaryClass.getConstructor(model.BookingData.class);
+                javax.swing.JFrame summaryPanel = (javax.swing.JFrame) constructor.newInstance(bookingData);
+                
+           
+                
+                summaryPanel.setVisible(true); // Use the new instance
                 this.dispose(); // close current window
             } catch (Exception e) {
-                logger.log(Level.SEVERE, "Could not instantiate PaymentPanelMainMenu", e);
-                JOptionPane.showMessageDialog(this, "Error: Could not load the next panel.", "System Error", JOptionPane.ERROR_MESSAGE);
+                logger.log(Level.SEVERE, "Could not instantiate BookingSummaryPanel", e);
+                JOptionPane.showMessageDialog(this, "Error: Could not load the next panel (BookingSummaryPanel).", "System Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
