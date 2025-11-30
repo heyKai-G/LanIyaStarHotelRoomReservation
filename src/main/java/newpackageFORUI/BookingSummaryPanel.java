@@ -35,6 +35,7 @@ public class BookingSummaryPanel extends javax.swing.JFrame {
     // Default constructor for design/main method, kept for compilation but should be updated if used in main flow
     public BookingSummaryPanel() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     // Helper method to calculate the number of days between check-in and check-out
@@ -172,6 +173,7 @@ public class BookingSummaryPanel extends javax.swing.JFrame {
         double servicesTotal = calculateServicesTotal();
         double grandTotal = roomTotal + addOnsTotal + servicesTotal;
         
+        bookingData.setGrandTotal(grandTotal);
         StringBuilder summary = new StringBuilder();
         
         // HEADER

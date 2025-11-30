@@ -99,11 +99,11 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jCVV" pref="84" max="32767" attributes="0"/>
+                      <Component id="jCardNum" pref="115" max="32767" attributes="0"/>
                       <Component id="jExpiryDate" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jCardNum" max="32767" attributes="0"/>
+                      <Component id="jCVV" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jTotalAmount" min="-2" pref="120" max="-2" attributes="0"/>

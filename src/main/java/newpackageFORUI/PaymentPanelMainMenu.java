@@ -181,8 +181,9 @@ public class PaymentPanelMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jConfirmActionPerformed
 
     private void jBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+          BookingSummaryPanel summary = new BookingSummaryPanel(bookingData);
+          summary.setVisible(true);
+          this.dispose();
     }//GEN-LAST:event_jBackActionPerformed
 
     /**

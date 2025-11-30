@@ -4,6 +4,10 @@
  */
 package newpackageFORUI;
 import model.BookingData;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException; 
+import javax.swing.JOptionPane;
 /**
  *
  * @author Lenovo
@@ -11,7 +15,7 @@ import model.BookingData;
 public class PaymentPanelCard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentPanelCard.class.getName());
-private final BookingData bookingData; // <-- ADDED FIELD
+    private final BookingData bookingData; // <-- ADDED FIELD
     /**
      * Creates new form PaymentPanelCard
      */
@@ -19,13 +23,19 @@ private final BookingData bookingData; // <-- ADDED FIELD
         initComponents();
         setLocationRelativeTo(null);   
         this.bookingData = null; // Set null for design mode
-     
     }
     
     public PaymentPanelCard(BookingData bookingData) { // <-- ADDED CONSTRUCTOR
         this.bookingData = bookingData;
         initComponents();
         setLocationRelativeTo(null);   
+        
+        double grandTotal = bookingData.getGrandTotal();
+        jTotalAmount.setText(String.format("Php %,.2f", grandTotal));
+        
+        // 2. Make the Total amount due field read-only
+        jTotalAmount.setEditable(false);
+     
     }
 
     /**
@@ -82,10 +92,10 @@ private final BookingData bookingData; // <-- ADDED FIELD
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCVV, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(jCardNum, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                     .addComponent(jExpiryDate)
-                    .addComponent(jCardNum))
-                .addGap(37, 37, 37)
+                    .addComponent(jCVV))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,30 +175,91 @@ private final BookingData bookingData; // <-- ADDED FIELD
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed
         // TODO add your handling code here:
-       
-      
-    this.dispose();
+       PaymentPanelMainMenu paymentMenu = new PaymentPanelMainMenu(bookingData);
+       paymentMenu.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_jBackButtonActionPerformed
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here:
-          String cardNum = jCardNum.getText().trim();
-    String expiry = jExpiryDate.getText().trim();
-    String cvv = jCVV.getText().trim();
+        String cardNumber = jCardNum.getText().trim();
+            String expiryDate = jExpiryDate.getText().trim();
+            String cvv = jCVV.getText().trim();
 
-    if (cardNum.isEmpty() || expiry.isEmpty() || cvv.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Please fill out ALL fields before confirming.",
-                "Missing Information",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+            // --- 1. Card Number Validation (13-19 digits, numeric) ---
+            // Common card numbers are 13 to 19 digits long.
+            if (!cardNumber.matches("^\\d{16}$")) {
+                JOptionPane.showMessageDialog(this, 
+                    "Invalid Card Number. Must be 16 digits.", 
+                    "Validation Error", JOptionPane.ERROR_MESSAGE);
+                jCardNum.requestFocus();
+                return;
+            }
 
-    // Continue if all filled
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "Payment processed successfully!",
-            "Success",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            // --- 2. Expiry Date Validation (MM/YY or MM/YYYY, and future date) ---
+            YearMonth expDate;
+            try {
+                DateTimeFormatter formatter;
+                // Determine format based on length
+                if (expiryDate.length() == 5 && expiryDate.contains("/")) { // MM/YY
+                    formatter = DateTimeFormatter.ofPattern("MM/yy");
+                } else if (expiryDate.length() == 7 && expiryDate.contains("/")) { // MM/YYYY
+                     formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+                } else {
+                    JOptionPane.showMessageDialog(this, 
+                        "Invalid Expiry Date format. Use MM/YY or MM/YYYY.", 
+                        "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    jExpiryDate.requestFocus();
+                    return;
+                }
+
+                expDate = YearMonth.parse(expiryDate, formatter);
+            } catch (DateTimeParseException e) {
+                 JOptionPane.showMessageDialog(this, 
+                    "Invalid Expiry Date format or value. Use MM/YY or MM/YYYY.", 
+                    "Validation Error", JOptionPane.ERROR_MESSAGE);
+                jExpiryDate.requestFocus();
+                return;
+            }
+
+            // Check if the expiry date is in the future (or current month/year)
+            YearMonth now = YearMonth.now();
+            if (expDate.isBefore(now)) {
+                JOptionPane.showMessageDialog(this, 
+                    "Card has expired. Please use a valid card.", 
+                    "Validation Error", JOptionPane.ERROR_MESSAGE);
+                jExpiryDate.requestFocus();
+                return;
+            }
+
+            // --- 3. CVV Validation (3 or 4 digits, numeric) ---
+            if (!cvv.matches("^\\d{3,4}$")) {
+                JOptionPane.showMessageDialog(this, 
+                    "Invalid CVV. Must be 3 or 4 digits.", 
+                    "Validation Error", JOptionPane.ERROR_MESSAGE);
+                jCVV.requestFocus();
+                return;
+            }
+
+            // --- 4. Payment Success ---
+            // Get total amount for display
+            String totalDueText = jTotalAmount.getText().replaceAll("[^\\d.]", "");
+            double totalDue = 0.0;
+            try {
+                 totalDue = Double.parseDouble(totalDueText);
+            } catch (NumberFormatException e) {
+                 // Defensive catch
+            }
+
+            String message = String.format("Payment Successful!\n\n"
+                                         + "Card Number: **** **** **** %s\n"
+                                         + "Total Charged: Php %,.2f", 
+                                         cardNumber.substring(cardNumber.length() - 4), totalDue);
+
+            JOptionPane.showMessageDialog(this, message, "Credit Payment Completed", JOptionPane.INFORMATION_MESSAGE);
+
+            // Close the window after successful payment
+            this.dispose();
     }//GEN-LAST:event_jConfirmActionPerformed
 
     /**

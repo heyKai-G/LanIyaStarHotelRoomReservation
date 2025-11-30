@@ -12,7 +12,7 @@ import model.BookingData;
 public class PaymentPanelCash extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentPanelCash.class.getName());
- private final BookingData bookingData;
+    private final BookingData bookingData;
     /**
      * Creates new form PaymentPanelCash
      */
@@ -20,6 +20,13 @@ public class PaymentPanelCash extends javax.swing.JFrame {
          this.bookingData = bookingData;
         initComponents();
         setLocationRelativeTo(null);   
+        
+        // 1. Display Grand Total
+        double grandTotal = bookingData.getGrandTotal();
+        jTotal.setText(String.format("Php %,.2f", grandTotal));
+
+        // 2. Make the Total amount due field read-only
+        jTotal.setEditable(false);
     }
 
     /**
@@ -57,13 +64,13 @@ public class PaymentPanelCash extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Input pay:");
+        jLabel3.setText("INPUT PAYMENT:");
 
         jInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Total amount due:");
+        jLabel2.setText("TOTAL AMOUNT DUE:");
         jLabel2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -76,26 +83,26 @@ public class PaymentPanelCash extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jInput, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jInput, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jInput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
         );
 
@@ -132,7 +139,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 337, Short.MAX_VALUE))
+                .addGap(0, 304, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +148,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,11 +160,59 @@ public class PaymentPanelCash extends javax.swing.JFrame {
 
     private void jConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmActionPerformed
         // TODO add your handling code here:
+        String totalDueText = jTotal.getText().replaceAll("[^\\d.]", "");
+        double totalDue;
+        try {
+            totalDue = Double.parseDouble(totalDueText);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error parsing total amount due.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Get the user input for payment
+        String inputPayText = jInput.getText().trim();
+        if (inputPayText.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter the payment amount.", "Input Required", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        double inputPay;
+        try {
+            inputPay = Double.parseDouble(inputPayText);
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            jInput.setText(""); // Clear invalid input
+            return;
+        }
+
+        // Check if the input is sufficient
+        if (inputPay >= totalDue) {
+            double change = inputPay - totalDue;
+            
+            // Display success and change
+            String message = String.format("Payment Successful!\n\n"
+                                         + "Amount Paid: Php %,.2f\n"
+                                         + "Change: Php %,.2f", 
+                                         inputPay, change);
+            
+            javax.swing.JOptionPane.showMessageDialog(this, message, "Payment Completed", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            // Optionally, close the payment window after confirmation
+            this.dispose();
+
+        } else {
+            // Insufficient payment
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                String.format("Payment failed. Amount paid (Php %,.2f) is less than the total due (Php %,.2f).", inputPay, totalDue), 
+                "Insufficient Payment", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jConfirmActionPerformed
 
     private void jBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBackButtonActionPerformed
         // TODO add your handling code here:
-    
+        PaymentPanelMainMenu paymentMenu = new PaymentPanelMainMenu(bookingData);
+        paymentMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBackButtonActionPerformed
 
