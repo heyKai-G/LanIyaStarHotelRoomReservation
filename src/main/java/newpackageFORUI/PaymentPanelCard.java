@@ -8,6 +8,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException; 
 import javax.swing.JOptionPane;
+import dao.BookingDao;
 /**
  *
  * @author Lenovo
@@ -261,6 +262,8 @@ public class PaymentPanelCard extends javax.swing.JFrame {
                                          cardNumber.substring(cardNumber.length() - 4), totalDue);
 
             JOptionPane.showMessageDialog(this, message, "Credit Payment Completed", JOptionPane.INFORMATION_MESSAGE);
+            BookingDao b = new BookingDao();
+            b.saveBooking(bookingData);
 
             // Close the window after successful payment
             this.dispose();

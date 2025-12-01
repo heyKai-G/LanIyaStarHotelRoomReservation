@@ -34,7 +34,7 @@ import java.util.List;
  *
  * @author Lenovo
  */
-public class BookingFormPanel extends javax.swing.JFrame {
+public class BookingFormFrame extends javax.swing.JFrame {
     String[] destinationTypes = {"Local", "International"};
 
 String[] localDestinations = {
@@ -52,15 +52,9 @@ String[] internationalDestinations = {
 };
 
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BookingFormPanel.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BookingFormFrame.class.getName());
     private BookingData bookingData = new BookingData();
 
-    
-    
-    
-    
-    
-    
     
     
     
@@ -68,8 +62,10 @@ String[] internationalDestinations = {
     /**
      * Creates new form BookingFormPanel
      */
-    public BookingFormPanel() {
+    public BookingFormFrame() {
           initComponents();
+       this.setResizable(false);
+       this.setLocationRelativeTo(null);
           // ADD LISTENER TO AUTO-LOAD DESTINATIONS
     // =====================================
     // 1. CLEAR COMBOBOXES FIRST
@@ -132,8 +128,6 @@ String[] internationalDestinations = {
     // Update children age boxes on startup
     updateAgeInputs(); 
     
-    this.setResizable(false);
-    this.setLocationRelativeTo(null);
     
     // ===== Rule 1: Check-in must be after today =====
     jDatechooseCheckin.setMinSelectableDate(new java.util.Date(today.toEpochDay() * 24*60*60*1000 + 24*60*60*1000)); // tomorrow
@@ -913,7 +907,7 @@ if (result == JOptionPane.YES_OPTION) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new BookingFormPanel().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new BookingFormFrame().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

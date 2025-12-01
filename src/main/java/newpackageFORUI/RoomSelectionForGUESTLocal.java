@@ -569,7 +569,7 @@ try {
     if (result == JOptionPane.YES_OPTION) {
         // clear all fields
         enterRoomInput.setText("");
-        BookingFormPanel booking = new BookingFormPanel();
+        BookingFormFrame booking = new BookingFormFrame();
         booking.setVisible(true);
         this.dispose();
     }

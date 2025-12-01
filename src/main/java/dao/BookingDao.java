@@ -32,7 +32,7 @@ public class BookingDao {
           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         String sqlAddon =
-            "INSERT INTO addon (room_id, guest_id, bed, blacket, pillow, toiletries) "
+            "INSERT INTO addon (room_id, guest_id, bed, blanket, pillow, toiletries) "
           + "VALUES (?, ?, ?, ?, ?, ?)";
 
         String sqlService =
@@ -80,10 +80,10 @@ public class BookingDao {
             ps2.setInt(2, Integer.parseInt(data.getSelectedRoomIdInput()));
             ps2.setString(3, data.getBookerName());
             ps2.setDate(4, new java.sql.Date(data.getBirthdate().getTime()));
-            ps2.setInt(5, data.getBookerAge());
+            ps2.setInt(5, data.getAge());
             ps2.setInt(6, data.getAdults());
             ps2.setInt(7, data.getChildren());
-            ps2.setString(8, data.childrenAgeStr);
+            ps2.setString(8, data.getChildrenAgeStr());
             ps2.setString(9, data.getMobile());
             ps2.setString(10, data.getEmail());
             ps2.executeUpdate();
@@ -112,8 +112,8 @@ public class BookingDao {
             ps4.setInt(2, guestId);
             ps4.setInt(3, data.getSp_guests());
             ps4.setInt(4, data.getGym_guests());
-            ps4.setInt(5, data.getFs_guests());
-            ps4.setInt(6, data.getSp_pwdSenior());
+            ps4.setInt(5, data.getallSpa());
+            ps4.setInt(6, data.getallPwd());
             ps4.executeUpdate();
 
             // =======================

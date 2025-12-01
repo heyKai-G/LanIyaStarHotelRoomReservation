@@ -235,7 +235,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         // Go to BookingForm
-        BookingFormPanel booking = new BookingFormPanel();
+        BookingFormFrame booking = new BookingFormFrame();
         booking.setVisible(true);
         booking.pack();
         booking.setLocationRelativeTo(null); // Center the new window

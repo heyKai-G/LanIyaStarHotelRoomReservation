@@ -194,7 +194,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
         // Check if the input is sufficient
         if (inputPay >= totalDue) {
             double change = inputPay - totalDue;
-            BookingDAO dao = new BookingDAO();
+            BookingDao dao = new BookingDao();
             boolean saved = dao.saveBooking(bookingData);
             
             if (!saved) {
@@ -203,8 +203,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
                 "Database Error",
                 javax.swing.JOptionPane.ERROR_MESSAGE);
         return; // do NOT continue
-    }
-            =
+    }          
 
             // ============================
             // 2. Show Receipt
@@ -220,6 +219,8 @@ public class PaymentPanelCash extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this,
                     message, "Payment Completed",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            
 
             // ============================
             // 3. Close Window

@@ -7,11 +7,34 @@ package model;
 import java.util.List;
 import java.util.Date;
 import javax.swing.JOptionPane;
+
+
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
+
+
+
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author 
  */
+
+
+
 public class BookingData {
+    
+    
+    
+    private int age;
+
+    
     private String Booker_name;
     private Date birthdate;
     private String email;
@@ -20,8 +43,25 @@ public class BookingData {
     private int adults;
     private int children;
     private List<Integer> childrenAges;
+    private String childrenAgeStr = "";
+
     
-    public String childrenAgeStr = childrenAges.toString();
+    public List<Integer> getChildrenAges() {
+        return childrenAges;
+    }
+
+    public void setChildrenAges(List<Integer> childrenAges) {
+        this.childrenAges = childrenAges;
+        updateChildrenAgeStr();     // auto-update the string
+    }
+
+    public void updateChildrenAgeStr() {
+        this.childrenAgeStr = childrenAges.toString();
+    }
+
+    public String getChildrenAgeStr() {
+        return childrenAgeStr;
+    }
 
     private String destinationType;
     private String destination;
@@ -63,6 +103,13 @@ public class BookingData {
     private int tm_days;
     // END: Fields for Services
     
+    private int allSpa = afm_guests + fs_guests + tm_guests;
+    private int allpwd = afm_pwdSenior + fs_pwdSenior + tm_pwdSenior;
+    
+    public int getallSpa() { return allSpa; }
+    public int getallPwd() { return allpwd; }
+    
+    
     private String determinedSeason; // <<< ADDED
     private String selectedRateColumn; // <<< ADDED
     
@@ -78,6 +125,37 @@ public class BookingData {
     public Date getBirthdate() { return birthdate; }
     public void setBirthdate(Date birthdate) { this.birthdate = birthdate; }
 
+    
+    
+    
+    
+    // NEW: Getter for age, which computes the age from birthdate
+    public int getAge() {
+        if (this.birthdate != null) {
+            // 1. Convert java.util.Date to java.time.LocalDate
+            LocalDate birthLocalDate = this.birthdate.toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            
+            // 2. Calculate the Period between the birth date and today's date
+            return Period.between(birthLocalDate, LocalDate.now()).getYears();
+        }
+        return 0; // Return 0 or handle null case as appropriate
+    }
+    
+    // NEW: Setter for age (optional, as it's computed, but included for completeness)
+    public void setAge(int age) { this.age = age; } // Note: This field is usually ignored if age is computed.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
@@ -89,9 +167,6 @@ public class BookingData {
 
     public int getChildren() { return children; }
     public void setChildren(int children) { this.children = children; }
-
-    public List<Integer> getChildrenAges() { return childrenAges; }
-    public void setChildrenAges(List<Integer> childrenAges) { this.childrenAges = childrenAges; }
 
     public String getDestinationType() { return destinationType; }
     public void setDestinationType(String destinationType) { this.destinationType = destinationType; }
