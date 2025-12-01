@@ -65,6 +65,7 @@ public class BookingData {
 
     private String destinationType;
     private String destination;
+    private String selectedRoomType;
 
     private Date checkIn;
     private Date checkOut;
@@ -268,6 +269,15 @@ public class BookingData {
     
     public String getPaymentMethod() { return paymentMethod; }
     public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    
+    // Add the getter and setter methods
+public String getSelectedRoomType() {
+    return selectedRoomType;
+}
+
+public void setSelectedRoomType(String selectedRoomType) {
+    this.selectedRoomType = selectedRoomType;
+}
     
     // END: New Getters & Setters for Services
 

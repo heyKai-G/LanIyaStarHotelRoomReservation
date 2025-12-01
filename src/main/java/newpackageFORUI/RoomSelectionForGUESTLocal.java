@@ -177,7 +177,7 @@ public class RoomSelectionForGUESTLocal extends javax.swing.JFrame {
         
         String url = "jdbc:mysql://localhost:3306/hotel_reservation";  
         String user = "root";  
-        String password = "ballislife2006"; 
+        String password = "password"; 
 
         // Note: Assuming roomSelectionTableLocal is the JTable variable name
         if (roomSelectionTableLocal == null) {
@@ -502,7 +502,10 @@ public class RoomSelectionForGUESTLocal extends javax.swing.JFrame {
 
     private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
        String roomInput = enterRoomInput.getText().trim();
+       int selectedRow = roomSelectionTableLocal.getSelectedRow();
 
+ 
+       
 if (roomInput.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Please enter a Room ID.", "Input Error", JOptionPane.WARNING_MESSAGE);
     return;
@@ -513,6 +516,20 @@ try {
 
     // 1. Check if the room exists and is available
     if (checkRoomAvailability(selectedRoomId)) {
+        
+             if (selectedRow != -1) {
+    DefaultTableModel model = (DefaultTableModel) roomSelectionTableLocal.getModel();
+
+    // 1. Get the simple Room Type name from the table
+    // *****************************************************************
+    // IMPORTANT: You MUST verify the column index (0, 1, 2, etc.) in your table.
+    // Assuming 'Room Type' (e.g., "Standard") is the FIRST column (index 0).
+    String roomType = model.getValueAt(selectedRow, 0).toString(); 
+    // *****************************************************************
+
+    // 2. Save the simple room type name to the new field in BookingData
+    bookingData.setSelectedRoomType(roomType);
+             }
         // 2. Save Data
         bookingData.setSelectedRoomIdInput(roomInput);
         

@@ -17,11 +17,56 @@ public class BookingDao {
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/hotel_reservation",
                 "root",
-                "ballislife2006"
+                "password"
         );
     }
      
          public boolean saveBooking(BookingData data) {
+    
+    // =======================================================
+    // 1. ROBUSTLY DETERMINE AND SET room_type (YOUR FIX)
+    // =======================================================
+    int roomId;
+    String roomType;
+
+    try {
+        // 1a. Ensure the Room ID is not null/empty and can be parsed
+        if (data.getSelectedRoomIdInput() == null || data.getSelectedRoomIdInput().trim().isEmpty()) {
+            System.err.println("CRITICAL ERROR: Room ID input is missing in BookingData.");
+            return false;
+        }
+        
+        roomId = Integer.parseInt(data.getSelectedRoomIdInput().trim());
+    } catch (NumberFormatException e) {
+        System.err.println("CRITICAL ERROR: Room ID is not a valid number: " + data.getSelectedRoomIdInput());
+        e.printStackTrace();
+        return false;
+    }
+
+    // 1b. Map the Room ID to the Room Type String
+    switch (roomId) {
+        case 1:
+            roomType = "Standard";
+            break;
+        case 2:
+            roomType = "Deluxe";
+            break;
+        case 3:
+            roomType = "Quadruple";
+            break;
+        case 4:
+            roomType = "Family";
+            break;
+        case 5:
+            roomType = "Suite";
+            break;
+        default:
+            System.err.println("CRITICAL ERROR: Unknown Room ID found: " + roomId);
+            return false; 
+    }
+
+    // 1c. Set the determined Room Type in the BookingData object
+    data.setSelectedRoomType(roomType);
 
         String sqlBookingForm = 
             "INSERT INTO booking_form (room_id, check_in, check_out) VALUES (?, ?, ?)";
@@ -49,9 +94,9 @@ public class BookingDao {
           + "destination, room_type, check_in, check_out) "
           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        String sqlPayment =
-            "INSERT INTO payment (booking_id, room_id, guest_id, payment_method) "
-          + "VALUES (?, ?, ?, ?)";
+        String sqlPayment = 
+    "INSERT INTO payment (transaction_id, booking_id, room_id, guest_id, payment_method) "
+  + "VALUES (?, ?, ?, ?, ?)"; // <-- Added 'transaction_id' and its placeholde
 
         Connection conn = null;
 
@@ -126,7 +171,7 @@ public class BookingDao {
                 psLocal.setInt(3, guestId);
                 psLocal.setString(4, data.getDestinationType());
                 psLocal.setString(5, data.getDestination());
-                psLocal.setString(6, data.getSelectedRoomCapacity());
+                psLocal.setString(6, data.getSelectedRoomType());
                 psLocal.setDate(7, new java.sql.Date(data.getCheckIn().getTime()));
                 psLocal.setDate(8, new java.sql.Date(data.getCheckOut().getTime()));
                 psLocal.executeUpdate();
@@ -137,7 +182,7 @@ public class BookingDao {
                 psIntl.setInt(3, guestId);
                 psIntl.setString(4, data.getDestinationType());
                 psIntl.setString(5, data.getDestination());
-                psIntl.setString(6, data.getSelectedRoomCapacity());
+                psIntl.setString(6, data.getSelectedRoomType());
                 psIntl.setDate(7, new java.sql.Date(data.getCheckIn().getTime()));
                 psIntl.setDate(8, new java.sql.Date(data.getCheckOut().getTime()));
                 psIntl.executeUpdate();
@@ -146,12 +191,20 @@ public class BookingDao {
             // =======================
             // 6. PAYMENT
             // =======================
-            PreparedStatement ps6 = conn.prepareStatement(sqlPayment);
-            ps6.setInt(1, bookingId);
-            ps6.setInt(2, Integer.parseInt(data.getSelectedRoomIdInput()));
-            ps6.setInt(3, guestId);
-            ps6.setString(4, data.getPaymentMethod());
-            ps6.executeUpdate();
+            // Generate a simple, unique transaction ID (for cash payments)
+String transactionId = "TXN_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 1000);
+
+PreparedStatement ps6 = conn.prepareStatement(sqlPayment);
+
+// Bind the new transaction ID (at index 1)
+ps6.setString(1, transactionId); // <-- NEW LINE
+
+// Shift all subsequent indices down by 1
+ps6.setInt(2, bookingId); // was 1
+ps6.setInt(3, Integer.parseInt(data.getSelectedRoomIdInput())); // was 2
+ps6.setInt(4, guestId); // was 3
+ps6.setString(5, data.getPaymentMethod()); // was 4
+ps6.executeUpdate();
 
             // =======================
             //     COMMIT SUCCESS
