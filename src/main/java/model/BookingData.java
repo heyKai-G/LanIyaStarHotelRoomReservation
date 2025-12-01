@@ -20,6 +20,8 @@ public class BookingData {
     private int adults;
     private int children;
     private List<Integer> childrenAges;
+    
+    public String childrenAgeStr = childrenAges.toString();
 
     private String destinationType;
     private String destination;

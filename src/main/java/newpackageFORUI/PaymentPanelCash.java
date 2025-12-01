@@ -9,6 +9,8 @@ import model.BookingData;
  *
  * @author Lenovo
  */
+import dao.BookingDao;
+
 public class PaymentPanelCash extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentPanelCash.class.getName());
@@ -188,16 +190,35 @@ public class PaymentPanelCash extends javax.swing.JFrame {
         // Check if the input is sufficient
         if (inputPay >= totalDue) {
             double change = inputPay - totalDue;
+            BookingDAO dao = new BookingDAO();
+            boolean saved = dao.saveBooking(bookingData);
             
-            // Display success and change
-            String message = String.format("Payment Successful!\n\n"
-                                         + "Amount Paid: Php %,.2f\n"
-                                         + "Change: Php %,.2f", 
-                                         inputPay, change);
-            
-            javax.swing.JOptionPane.showMessageDialog(this, message, "Payment Completed", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
-            // Optionally, close the payment window after confirmation
+            if (!saved) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Payment successful BUT saving to database failed.",
+                "Database Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        return; // do NOT continue
+    }
+
+            // ============================
+            // 2. Show Receipt
+            // ============================
+            String message = String.format(
+                    "Payment Successful!\n\n"
+                    + "Amount Paid: Php %,.2f\n"
+                    + "Change: Php %,.2f\n\n"
+                    + "Booking has been saved!",
+                    inputPay, change
+            );
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    message, "Payment Completed",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // ============================
+            // 3. Close Window
+            // ============================
             this.dispose();
 
         } else {
