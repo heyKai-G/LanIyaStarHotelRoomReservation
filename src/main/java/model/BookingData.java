@@ -67,7 +67,8 @@ public class BookingData {
     private String selectedRateColumn; // <<< ADDED
     
     private double grandTotal;
-
+    
+    private String paymentMethod; // <- ADDED THIS PAYMETHOD METHOD VARIABLE
 
     // ==== GETTERS & SETTERS ====
     public String getBookerName() { return Booker_name; }
@@ -179,9 +180,9 @@ public class BookingData {
     
     public String getSelectedRoomCapacity() { return selectedRoomCapacity; }
 
-public void setSelectedRoomCapacity(String selectedRoomCapacity) { this.selectedRoomCapacity = selectedRoomCapacity; }
+    public void setSelectedRoomCapacity(String selectedRoomCapacity) { this.selectedRoomCapacity = selectedRoomCapacity; }
 
-public String getDeterminedSeason() { return determinedSeason; }
+    public String getDeterminedSeason() { return determinedSeason; }
     public void setDeterminedSeason(String determinedSeason) { this.determinedSeason = determinedSeason; }
 
     public String getSelectedRateColumn() { return selectedRateColumn; }
@@ -189,6 +190,9 @@ public String getDeterminedSeason() { return determinedSeason; }
     
     public double getGrandTotal() { return grandTotal; }
     public void setGrandTotal(double grandTotal) { this.grandTotal = grandTotal; }
+    
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
     
     // END: New Getters & Setters for Services
 

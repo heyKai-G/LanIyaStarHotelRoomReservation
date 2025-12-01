@@ -186,6 +186,10 @@ public class PaymentPanelCash extends javax.swing.JFrame {
             jInput.setText(""); // Clear invalid input
             return;
         }
+        
+        // === START: ADDED LINE to set paymentMethod ===
+            bookingData.setPaymentMethod("Cash"); 
+        // === END: ADDED LINE ===
 
         // Check if the input is sufficient
         if (inputPay >= totalDue) {
@@ -200,6 +204,7 @@ public class PaymentPanelCash extends javax.swing.JFrame {
                 javax.swing.JOptionPane.ERROR_MESSAGE);
         return; // do NOT continue
     }
+            =
 
             // ============================
             // 2. Show Receipt

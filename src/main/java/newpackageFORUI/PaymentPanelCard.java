@@ -240,6 +240,10 @@ public class PaymentPanelCard extends javax.swing.JFrame {
                 jCVV.requestFocus();
                 return;
             }
+            
+            // === START: ADDED LINE to set paymentMethod ===
+            bookingData.setPaymentMethod("Card"); 
+            // === END: ADDED LINE ===
 
             // --- 4. Payment Success ---
             // Get total amount for display
