@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Color;
 import javax.swing.JTextArea; // Explicit import
 import javax.swing.JScrollPane; // Explicit import
 
@@ -30,12 +31,16 @@ public class BookingSummaryPanel extends javax.swing.JFrame {
         initComponents();
         // Call a method to populate the summary text upon creation
         updateSummaryText();
+        Color bgColor = Color.decode("#c6af81");
+        this.getContentPane().setBackground(bgColor);
     }
     
     // Default constructor for design/main method, kept for compilation but should be updated if used in main flow
     public BookingSummaryPanel() {
         initComponents();
         setLocationRelativeTo(null);
+        Color bgColor = Color.decode("#c6af81");
+        this.getContentPane().setBackground(bgColor);
     }
     
     // Helper method to calculate the number of days between check-in and check-out
@@ -303,6 +308,7 @@ public class BookingSummaryPanel extends javax.swing.JFrame {
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 760, 50));
 
+        backButton.setBackground(new java.awt.Color(198, 175, 129));
         backButton.setText("BACK");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,6 +317,7 @@ public class BookingSummaryPanel extends javax.swing.JFrame {
         });
         getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 100, 40));
 
+        confirmButton.setBackground(new java.awt.Color(198, 175, 129));
         confirmButton.setText("CONFIRM");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
